@@ -7,35 +7,59 @@ public class GameManager : MonoBehaviour
 {
     
     //Prefab fields
-    public GameObject[] Asteroid;
+    public GameObject Asteroid;
+    public GameObject Objective;
     public GameObject[] Powerups;
-    public GameObject[] Player;
-    public GameObject[] QuestItems;
     public GameObject[] Upgrades;
     public GameObject[] Bombs;
+    public GameObject player;
 
 
-
-    private Stage1Manager stage1Manager;
+    public StageInterface CurrentStage { get; private set; }
     private PlayerController playerController;
-    public static GameManager instance;
-    public Vector2 ScreenBounds { get; }
-    public Vector2 PlayerBounds { get; }
+    private static GameManager instance;
+    public static GameManager Instance { get { return instance; } }
+    public Vector2 ScreenBounds { get; private set; }
+    public Vector2 PlayerBounds { get; private set; }
 
     private GameState gameState;
+    private GameState nextGameState = GameState.Default;
+    private float waitTimer = 0f;
 
-    // make sure the constructor is private, so it can only be instantiated here
-    private GameManager()
+
+    public void Awake()
     {
+        if(instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        gameState = GameState.InitiateStage1;
+        
+
         ScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
         //Player bounds might be adjusted later
         PlayerBounds = ScreenBounds;
 
-        
+
     }
 
+    private void Start()
+    {
+        playerController = player.GetComponent<PlayerController>();
+    }
 
+    private void Wait(float timer, GameState nextState)
+    {
+        waitTimer = timer;
+        gameState = GameState.Wait;
+        nextGameState = nextState;
+    }
 
     private void Update()
     {
@@ -43,18 +67,38 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Default:
                 break;
+            case GameState.Wait:
+                if(waitTimer > 0)
+                {
+                    waitTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    gameState = nextGameState;
+                    nextGameState = GameState.Default;
+                }
+                break;
             case GameState.StartScreen:
                 break;
             case GameState.InitiateStage1:
-                //Create stage1 manager
-
+                CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Asteroid, Objective, Powerups);
+                CurrentStage.EnterStage();
+                gameState = GameState.Stage1;
                 break;
             case GameState.Stage1:
+                CurrentStage.ExecuteStage();
+                if(EndingConditionReached())
+                {
+                    CurrentStage.SetStageResult(StageResult.Win);
+                    gameState = GameState.EndStage1;
+                }
                 break;
             case GameState.EndStage1:
-                //kill stage 1 manager
+                CurrentStage.EndStage();
+                Wait(5, GameState.InitiateIntermission1);
                 break;
             case GameState.InitiateIntermission1:
+                Debug.Log("Start Intermission 1");
                 break;
             case GameState.Intermission1:
                 break;
@@ -91,19 +135,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public static GameManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new GameManager();
-            }
-
-            return instance;
-        }
-    }
-
     public void SetGameState(GameState gameState)
     {
         this.gameState = gameState;
@@ -115,30 +146,30 @@ public class GameManager : MonoBehaviour
     }
 
 
-
-    private void SpawnQuestObjects()
+    private bool EndingConditionReached()
     {
 
+        if(playerController.Health <= 0)
+        {
+            return true;
+        }
+        if(CurrentStage.WinConditionReached())
+        {
+            return true;
+        }
+
+
+        return false;
     }
 
 
-    private void SpawnObstacles()
-    {
 
-    }
-
-    private void SpawnPowerups()
-    {
-
-    }
-
-
-    
 
 
     public enum GameState
     {
         Default,
+        Wait,
         StartScreen,
         InitiateStage1,
         Stage1,
