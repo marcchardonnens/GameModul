@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
+
     public Sprite[] sprites;
     public bool PlayerFollowMouse = true;
     public bool PlayerCanGetHit = true;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool PlayerIsInvul = false;
 
     public int Health { get; private set; }
+    private float PlayerAnimationspeed = 0.0f;
 
 
     // Start is called before the first frame update
@@ -37,7 +40,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PlayerFollowMouse)
+        PlayerAnimationspeed = 10.0f;
+        animator.SetFloat("Blue_Move", PlayerAnimationspeed);
+
+        if (PlayerFollowMouse)
         {
             movePlayerToMouse();
         }
