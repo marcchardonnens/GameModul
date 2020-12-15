@@ -81,7 +81,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
 
     public void SpawnPowerups()
     {
-        GameObject go = Instantiate(Powerups[Random.Range(0, 2)], new Vector3(Random.Range(-game.PlayerBounds.x, game.PlayerBounds.x), Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
+        GameObject go = Instantiate(Powerups[Random.Range(0, 3)], new Vector3(Random.Range(-game.PlayerBounds.x, game.PlayerBounds.x), Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
         Debug.Log("Powerup Spawned");
 
     }

@@ -240,7 +240,7 @@ MonoBehaviour:
   Powerups:
   - {fileID: 6257818290385067248, guid: 183b4599ebfc30943ba69af37f8962da, type: 3}
   - {fileID: 8233752734548977390, guid: 608abef466554c14893d639657a2166b, type: 3}
-  - {fileID: 6219193825986748716, guid: 7be9603ebbf0ee340831545e52bb2afe, type: 3}
+  - {fileID: 5046893957691368432, guid: 39424dbc67dccec4fb3d5c20e6c26030, type: 3}
   Upgrades: []
   Bombs: []
   player: {fileID: 1584184494}
@@ -360,8 +360,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cf418063a0301ad4da5a88ad4668d65f, type: 3}
   - {fileID: 21300000, guid: 62003269525bb3c4a985738bab5f110a, type: 3}
   - {fileID: 21300000, guid: e251daf5eec09f24a9bb3e32b5e572d6, type: 3}
-  PlayerIsInvul: 0
   PlayerFollowMouse: 1
+  PlayerCanGetHit: 1
   puRemoveObjectsRadius: 10
   maxHealth: 10
   puInvulTime: 4
