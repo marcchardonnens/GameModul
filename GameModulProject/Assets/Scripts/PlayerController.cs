@@ -19,11 +19,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 bounds;
 
     private float invulTimer = 0f;
-    private float rotationSpeed = 0.5f;
+    private float rotationSpeed = -0.5f;
     private bool PlayerIsInvul = false;
 
     public int Health { get; private set; }
-    private float PlayerAnimationspeed = 0.0f;
 
 
     // Start is called before the first frame update
@@ -31,17 +30,16 @@ public class PlayerController : MonoBehaviour
     {
         game = GameManager.Instance;
         bounds = game.PlayerBounds;
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 3)];
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 4)];
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
 
         Health = maxHealth;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerAnimationspeed = 10.0f;
-        animator.SetFloat("Blue_Move", PlayerAnimationspeed);
 
         if (PlayerFollowMouse)
         {
