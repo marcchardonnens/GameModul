@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        gameState = GameState.InitiateStage1;
+        gameState = GameState.StartScreen;
         
 
         ScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         playerController = player.GetComponent<PlayerController>();
     }
+
 
     private void Wait(float timer, GameState nextState)
     {
@@ -82,8 +83,19 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.StartScreen:
+                GUIManager.Instance.OnTitleScreen();
+                break;
+            case GameState.StartGame:
+
+                GUIManager.Instance.OnGameStart();
+
+                //Fade out/in animation maybe
+
+                Wait(3, GameState.InitiateStage1);
+
                 break;
             case GameState.Endgame:
+                playerController.RefillHealth();
                 List<MonoBehaviour> objects = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
                 objects.AddRange(FindObjectsOfType<PowerupAbstract>());
                 objects.AddRange(FindObjectsOfType<Objective>());
@@ -91,7 +103,7 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(obj.gameObject);
                 }
-                Wait(1, GameState.StartScreen);
+                Wait(4, GameState.StartScreen);
                 break;
             case GameState.InitiateStage1:
                 CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Asteroid, Objective, Powerups);
@@ -116,6 +128,7 @@ public class GameManager : MonoBehaviour
                     //Wait(5, GameState.Endgame);
                     gameState = GameState.Endgame;
                 }
+                CurrentStage.ResetObjectiveCounter();
                 break;
             case GameState.InitiateIntermission1:
                 Debug.Log("Start Intermission 1");
@@ -152,6 +165,11 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+    }
+
+    public void StartGame()
+    {
+        gameState = GameState.StartGame;
     }
 
 
@@ -196,6 +214,7 @@ public class GameManager : MonoBehaviour
         Default,
         Wait,
         StartScreen,
+        StartGame,
         Endgame,
 
 

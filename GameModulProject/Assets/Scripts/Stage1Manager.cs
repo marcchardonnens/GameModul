@@ -34,7 +34,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
 
     private static float spawnOffset = 2;
 
-    private int objectiveCounter;
+    private int objectiveCounter = 0;
 
     void Awake()
     {
@@ -142,5 +142,10 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public int GetObjectiveCounter()
     {
         return objectiveCounter;
+    }
+
+    public void ResetObjectiveCounter()
+    {
+        objectiveCounter = 0;
     }
 }

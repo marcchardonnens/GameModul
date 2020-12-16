@@ -15,6 +15,7 @@ public interface StageInterface
     void SetStageResult(StageResult result);
     StageResult GetStageResult();
     int GetObjectiveCounter();
+    void ResetObjectiveCounter();
 
 }
 public enum StageResult

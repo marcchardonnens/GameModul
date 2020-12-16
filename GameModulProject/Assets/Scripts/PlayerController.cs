@@ -83,6 +83,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RefillHealth()
+    {
+        Health = maxHealth;
+    }
 
     public void PowerUpShield()
     {
