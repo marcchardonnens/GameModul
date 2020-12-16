@@ -14,6 +14,7 @@ public interface StageInterface
     void ObjectiveCollected();
     void SetStageResult(StageResult result);
     StageResult GetStageResult();
+    int GetObjectiveCounter();
 
 }
 public enum StageResult

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     public StageInterface CurrentStage { get; private set; }
-    private PlayerController playerController;
+    public PlayerController playerController { get; private set; }
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
     public Vector2 ScreenBounds { get; private set; }

@@ -112,10 +112,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 50, 50), sprites[0].texture);
-    }
+
 
     private void movePlayerToMouse()
     {

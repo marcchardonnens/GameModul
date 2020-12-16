@@ -61,8 +61,6 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     }
 
 
-
-
     public void SpawnObstacles()
     {
         int obstacleAmount = Random.Range(asteroidAmountMin, asteroidAmountMax);
@@ -139,5 +137,10 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public StageResult GetStageResult()
     {
         return result;
+    }
+
+    public int GetObjectiveCounter()
+    {
+        return objectiveCounter;
     }
 }
