@@ -47,4 +47,6 @@ public class GameStarter : MonoBehaviour
     {
         GUI.Label(new Rect(700, 650, 150, 50), timer.ToString());
     }
+
+
 }

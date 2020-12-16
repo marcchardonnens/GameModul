@@ -15,6 +15,7 @@ public class GUIManager : MonoBehaviour
     private GameManager game;
     private GameObject title;
     private GameObject gameStarter;
+    private GameObject Background;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class GUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        MoveBackground();
     }
 
     public void OnGameStart()
@@ -69,5 +70,10 @@ public class GUIManager : MonoBehaviour
         GUI.Label(new Rect(40, 10, 140, 40), " X " + objCounter);
         GUI.Label(new Rect(130, 10, 40, 40), imgHeart.texture);
         GUI.Label(new Rect(170, 10, 140, 40), " X " + game.playerController.Health);
+    }
+
+    private void MoveBackground()
+    {
+
     }
 }
