@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage1Manager : MonoBehaviour,StageInterface
 {
     public const float speedUpgradeModifier = 0.75f;
+    private const int nObstaclesArraySize = 5;
 
     //Obstacles
     public float asteroidDelay = 1f;
@@ -17,8 +18,8 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public float movementYmax = 0.25f;
     public float speedMin = 5f;
     public float speedMax = 15f;
-    public float scaleMin = 0.5f;
-    public float scaleMax = 1.5f;
+    public float scaleMin = 0.25f;
+    public float scaleMax = 1f;
 
     public int objectiveLimit = 5;
     public float objectiveSpawnDelay = 5f;
@@ -27,7 +28,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
 
 
     private GameObject Objective;
-    private GameObject Asteroid;
+    private GameObject[] Obstacles;
     private GameObject[] Powerups;
     private GameManager game;
 
@@ -47,9 +48,9 @@ public class Stage1Manager : MonoBehaviour,StageInterface
         game = GameManager.Instance;
     }
 
-    public void SetAsteroid(GameObject Asteroid)
+    public void SetObstacles(GameObject[] Obstacles)
     {
-        this.Asteroid = Asteroid;
+        this.Obstacles = Obstacles;
     }
     public void SetObjective(GameObject Objective)
     {
@@ -67,13 +68,13 @@ public class Stage1Manager : MonoBehaviour,StageInterface
         int obstacleAmount = Random.Range(asteroidAmountMin, asteroidAmountMax);
         for (int i = 0; i < obstacleAmount; i++)
         {
-            GameObject ago = Instantiate(Asteroid, new Vector3(game.ScreenBounds.x * spawnOffset, Random.Range(-game.ScreenBounds.y, game.ScreenBounds.y)), Quaternion.identity);
+            GameObject ago = Instantiate(Obstacles[Random.Range(0, nObstaclesArraySize)], new Vector3(game.ScreenBounds.x * spawnOffset, Random.Range(-game.ScreenBounds.y, game.ScreenBounds.y)), Quaternion.identity);
             Asteroid a = ago.GetComponent<Asteroid>();
             a.SetMovement(new Vector2(Random.Range(movementXmin,movementXmax), Random.Range(movementYmin,movementYmax)));
             float speed = Random.Range(5f, 15f);
             if(game.HasSpeedUpgrade())
             {
-                speed * V;
+                speed *= speedUpgradeModifier;
             }
             a.SetSpeed(speed);
             float scaleAmount = Random.Range(0.5f, 2.5f);

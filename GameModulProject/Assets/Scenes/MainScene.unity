@@ -250,8 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a8e4382c4303547a8c89c2e2a441a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Asteroid: {fileID: 7420349473264443021, guid: be57ec8caa879a84e8e64a2ad1fafc5d,
-    type: 3}
+  Obstacles:
+  - {fileID: 7420349473264443021, guid: be57ec8caa879a84e8e64a2ad1fafc5d, type: 3}
+  - {fileID: 2951627198501481812, guid: d106195b6322e204d8677b8bc5ccbfea, type: 3}
+  - {fileID: 7284470325947687144, guid: 63c046c4e2ec77b42bd42a39e9c60a11, type: 3}
+  - {fileID: 7091136303598953405, guid: 1f46ce01ff990d4439bef60cc6dcee87, type: 3}
+  - {fileID: 8597276547070053447, guid: 3a6fc4687be013643a3b4e8b9307cb23, type: 3}
   Objective: {fileID: 4164594793877064378, guid: e4d50936c49c72b4789d6b6ac5eea055,
     type: 3}
   Powerups:

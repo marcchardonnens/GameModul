@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     
     //Prefab fields
-    public GameObject Asteroid;
+    public GameObject[] Obstacles;
     public GameObject Objective;
     public GameObject[] Powerups;
     public GameObject[] Upgrades;
@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
                 Wait(4, GameState.StartScreen);
                 break;
             case GameState.InitiateStage1:
-                CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Asteroid, Objective, Powerups);
+                CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Obstacles, Objective, Powerups);
                 CurrentStage.EnterStage();
                 gameState = GameState.Stage1;
                 break;

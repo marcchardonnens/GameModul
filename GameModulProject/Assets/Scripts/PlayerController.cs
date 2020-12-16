@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private const int spriteArraySize = 4;
     private const float cameraShakeDuration = 0.18f;
     private int nRandomSpriteColor = 0;
-    private Sprite currentSprite;
+    private SpriteRenderer spriteRenderer;
 
     public int Health { get; private set; }
 
@@ -43,9 +43,9 @@ public class PlayerController : MonoBehaviour
         bounds = game.PlayerBounds;
         
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
-        currentSprite = GetComponent<SpriteRenderer>().sprite;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         Health = maxHealth;
-
+        Respawn();
     }
 
     // Update is called once per frame
@@ -136,18 +136,18 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         nRandomSpriteColor = Random.Range(0, spriteArraySize);
-        currentSprite = sprites[nRandomSpriteColor];
+        spriteRenderer.sprite = sprites[nRandomSpriteColor];
     }
 
     public void ApplyShieldUpgrade()
     {
         if(game.HasSpeedUpgrade())
         {
-            currentSprite = spritesWithBoth[nRandomSpriteColor];
+            spriteRenderer.sprite = spritesWithBoth[nRandomSpriteColor];
         }
         else
         {
-            currentSprite = spritesWithShield[nRandomSpriteColor];
+            spriteRenderer.sprite = spritesWithShield[nRandomSpriteColor];
         }
 
         maxHealth *= ShieldUpgradeModifier;
@@ -158,11 +158,11 @@ public class PlayerController : MonoBehaviour
     {
         if (game.HasShieldUpgrade())
         {
-            currentSprite = spritesWithBoth[nRandomSpriteColor];
+            spriteRenderer.sprite = spritesWithBoth[nRandomSpriteColor];
         }
         else
         {
-            currentSprite = spritesWithSpeed[nRandomSpriteColor];
+            spriteRenderer.sprite = spritesWithSpeed[nRandomSpriteColor];
         }
     }
 
