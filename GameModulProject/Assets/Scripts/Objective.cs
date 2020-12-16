@@ -5,6 +5,7 @@ using UnityEngine;
 public class Objective : MonoBehaviour
 {
 
+    public AudioClip Sound;
 
     private GameManager game;
 
@@ -32,6 +33,7 @@ public class Objective : MonoBehaviour
     {
         //count up Objective
         game.CurrentStage.ObjectiveCollected();
+        AudioManager.Instance.PlaySound(Sound);
         Destroy(this.gameObject);
     }
 }

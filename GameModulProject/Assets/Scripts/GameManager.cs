@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] Upgrades;
     public GameObject[] Bombs;
     public GameObject player;
+    public AudioClip AudioStageComplete;
+    public AudioClip AudioGameOver;
+
 
 
     public StageInterface CurrentStage { get; private set; }
@@ -80,6 +83,16 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.StartScreen:
                 break;
+            case GameState.Endgame:
+                List<MonoBehaviour> objects = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
+                objects.AddRange(FindObjectsOfType<PowerupAbstract>());
+                objects.AddRange(FindObjectsOfType<Objective>());
+                foreach (MonoBehaviour obj in objects)
+                {
+                    Destroy(obj.gameObject);
+                }
+                Wait(1, GameState.StartScreen);
+                break;
             case GameState.InitiateStage1:
                 CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Asteroid, Objective, Powerups);
                 CurrentStage.EnterStage();
@@ -89,13 +102,20 @@ public class GameManager : MonoBehaviour
                 CurrentStage.ExecuteStage();
                 if(EndingConditionReached())
                 {
-                    CurrentStage.SetStageResult(StageResult.Win);
                     gameState = GameState.EndStage1;
                 }
                 break;
             case GameState.EndStage1:
                 CurrentStage.EndStage();
-                Wait(5, GameState.InitiateIntermission1);
+                if(CurrentStage.GetStageResult() == StageResult.Win)
+                {
+                    Wait(5, GameState.InitiateIntermission1);
+                }
+                else
+                {
+                    //Wait(5, GameState.Endgame);
+                    gameState = GameState.Endgame;
+                }
                 break;
             case GameState.InitiateIntermission1:
                 Debug.Log("Start Intermission 1");
@@ -151,10 +171,15 @@ public class GameManager : MonoBehaviour
 
         if(playerController.Health <= 0)
         {
+            CurrentStage.SetStageResult(StageResult.Loss);
+            AudioManager.Instance.PlaySound(AudioGameOver);
             return true;
         }
         if(CurrentStage.WinConditionReached())
         {
+
+            CurrentStage.SetStageResult(StageResult.Win);
+            AudioManager.Instance.PlaySound(AudioStageComplete);
             return true;
         }
 
@@ -171,6 +196,10 @@ public class GameManager : MonoBehaviour
         Default,
         Wait,
         StartScreen,
+        Endgame,
+
+
+
         InitiateStage1,
         Stage1,
         EndStage1,

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Sprite[] sprites;
     public bool PlayerFollowMouse = true;
     public bool PlayerCanGetHit = true;
+    public AudioClip AudioGetHit;
 
     public float puRemoveObjectsRadius = 10f;
     public int maxHealth = 5;
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
         {
             invulTimer += 1f;
             Health--;
+            AudioManager.Instance.PlaySound(AudioGetHit);
         }
         if(Health <= 0)
         {
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     public void PowerUpShield()
     {
-        invulTimer += puInvulTime;   
+        invulTimer += puInvulTime;
     }
 
     public void PowerUpHeart()

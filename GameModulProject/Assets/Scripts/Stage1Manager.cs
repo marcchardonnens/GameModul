@@ -30,7 +30,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     private GameObject[] Powerups;
     private GameManager game;
 
-    public StageResult result { get; set; } = StageResult.Default;
+    private StageResult result = StageResult.Default;
 
     private static float spawnOffset = 2;
 
@@ -109,6 +109,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
 
         CancelInvoke("SpawnObstacles");
         CancelInvoke("SpawnPowerups");
+        CancelInvoke("SpawnObjective");
     }
 
     public void ExecuteStage()
@@ -133,5 +134,10 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public void SetStageResult(StageResult result)
     {
         this.result = result;
+    }
+
+    public StageResult GetStageResult()
+    {
+        return result;
     }
 }

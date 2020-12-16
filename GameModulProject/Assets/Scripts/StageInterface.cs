@@ -13,6 +13,7 @@ public interface StageInterface
     bool WinConditionReached();
     void ObjectiveCollected();
     void SetStageResult(StageResult result);
+    StageResult GetStageResult();
 
 }
 public enum StageResult
