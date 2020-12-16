@@ -7,13 +7,18 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     public Sprite[] sprites;
+    public Sprite[] spritesWithSpeed;
+    public Sprite[] spritesWithShield;
+    public Sprite[] spritesWithBoth;
     public bool PlayerFollowMouse = true;
     public bool PlayerCanGetHit = true;
     public AudioClip AudioGetHit;
 
+    private const int ShieldUpgradeModifier = 2;
     public float puRemoveObjectsRadius = 10f;
     public int maxHealth = 5;
     public float puInvulTime = 4f;
+    private const float hitImmuneTime = 1f;
 
 
     private GameManager game;
@@ -23,6 +28,11 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed = -0.5f;
     private bool PlayerIsInvul = false;
 
+    private const int spriteArraySize = 4;
+    private const float cameraShakeDuration = 0.18f;
+    private int nRandomSpriteColor = 0;
+    private Sprite currentSprite;
+
     public int Health { get; private set; }
 
 
@@ -31,9 +41,9 @@ public class PlayerController : MonoBehaviour
     {
         game = GameManager.Instance;
         bounds = game.PlayerBounds;
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 4)];
+        
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
-
+        currentSprite = GetComponent<SpriteRenderer>().sprite;
         Health = maxHealth;
 
     }
@@ -73,10 +83,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerIsInvul)
         {
-            invulTimer += 1f;
+            invulTimer += hitImmuneTime;
             Health--;
             AudioManager.Instance.PlaySound(AudioGetHit);
-            Camera.main.GetComponent<CameraShake>().shakeDuration = 0.18f;
+            Camera.main.GetComponent<CameraShake>().shakeDuration = cameraShakeDuration;
         }
         if(Health <= 0)
         {
@@ -116,6 +126,45 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    public void Death()
+    {
+
+    }
+
+
+    public void Respawn()
+    {
+        nRandomSpriteColor = Random.Range(0, spriteArraySize);
+        currentSprite = sprites[nRandomSpriteColor];
+    }
+
+    public void ApplyShieldUpgrade()
+    {
+        if(game.HasSpeedUpgrade())
+        {
+            currentSprite = spritesWithBoth[nRandomSpriteColor];
+        }
+        else
+        {
+            currentSprite = spritesWithShield[nRandomSpriteColor];
+        }
+
+        maxHealth *= ShieldUpgradeModifier;
+        Health = maxHealth;
+    }
+
+    public void ApplySpeedUpgrade()
+    {
+        if (game.HasShieldUpgrade())
+        {
+            currentSprite = spritesWithBoth[nRandomSpriteColor];
+        }
+        else
+        {
+            currentSprite = spritesWithSpeed[nRandomSpriteColor];
+        }
+    }
 
 
 

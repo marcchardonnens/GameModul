@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stage1Manager : MonoBehaviour,StageInterface
 {
+    public const float speedUpgradeModifier = 0.75f;
 
     //Obstacles
     public float asteroidDelay = 1f;
@@ -69,7 +70,12 @@ public class Stage1Manager : MonoBehaviour,StageInterface
             GameObject ago = Instantiate(Asteroid, new Vector3(game.ScreenBounds.x * spawnOffset, Random.Range(-game.ScreenBounds.y, game.ScreenBounds.y)), Quaternion.identity);
             Asteroid a = ago.GetComponent<Asteroid>();
             a.SetMovement(new Vector2(Random.Range(movementXmin,movementXmax), Random.Range(movementYmin,movementYmax)));
-            a.SetSpeed(Random.Range(5f, 15f));
+            float speed = Random.Range(5f, 15f);
+            if(game.HasSpeedUpgrade())
+            {
+                speed * V;
+            }
+            a.SetSpeed(speed);
             float scaleAmount = Random.Range(0.5f, 2.5f);
             a.transform.localScale += new Vector3(scaleAmount, scaleAmount, scaleAmount);
 

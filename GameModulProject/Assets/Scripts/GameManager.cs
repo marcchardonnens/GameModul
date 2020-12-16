@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour
     private GameState nextGameState = GameState.Default;
     private float waitTimer = 0f;
 
+    private bool playerHasShieldUpgrade = false;
+    private bool playerHasSpeedUpgrade = false;
+
+
 
     public void Awake()
     {
@@ -181,6 +185,26 @@ public class GameManager : MonoBehaviour
     public GameState GetGameState()
     {
         return gameState;
+    }
+
+    public void ApplyShieldUpgrade()
+    {
+        playerHasShieldUpgrade = true;
+    }
+
+    public void ApplySpeedUpgrade()
+    {
+        playerHasSpeedUpgrade = true;
+    }
+
+    public bool HasShieldUpgrade()
+    {
+        return playerHasShieldUpgrade;
+    }
+
+    public bool HasSpeedUpgrade()
+    {
+        return playerHasSpeedUpgrade;
     }
 
 

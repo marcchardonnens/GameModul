@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameStarter : MonoBehaviour
 {
+    public float hoverTimer = 3f;
 
     private float timer = 3f;
     private bool timerStarted = false;
@@ -25,7 +26,7 @@ public class GameStarter : MonoBehaviour
             }
             else
             {
-                timer = 3f;
+                timer = hoverTimer;
                 GameManager.Instance.StartGame();
             }
         }
@@ -33,13 +34,13 @@ public class GameStarter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        timer = 3f;
+        timer = hoverTimer;
         timerStarted = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        timer = 3f;
+        timer = hoverTimer;
         timerStarted = false;
     }
 
