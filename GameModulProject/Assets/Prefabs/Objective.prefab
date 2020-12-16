@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 82621514170558765}
   - component: {fileID: 4015349641441923438}
+  - component: {fileID: 583587570628996560}
   - component: {fileID: 3356727609902317703}
   - component: {fileID: 550939346326576593}
-  - component: {fileID: 1975674301061760989}
+  - component: {fileID: 8522901722522772323}
   m_Layer: 10
   m_Name: Objective
   m_TagString: Untagged
@@ -27,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4164594793877064378}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -78,12 +79,25 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.58, y: 7.73}
+  m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &583587570628996560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4164594793877064378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e762c4825133e9439c0fb678d21392d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sound: {fileID: 8300000, guid: f012b7e5f027fab43bc76c5cd8ed9795, type: 3}
 --- !u!50 &3356727609902317703
 Rigidbody2D:
   serializedVersion: 4
@@ -120,21 +134,23 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.865
---- !u!114 &1975674301061760989
-MonoBehaviour:
+  m_Radius: 1
+--- !u!95 &8522901722522772323
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4164594793877064378}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e762c4825133e9439c0fb678d21392d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 242ddd9d37b2b934ebee2e56cc936660, type: 3}
-  - {fileID: 21300000, guid: 3b20a5a5af667654194dcb6fac737bfc, type: 3}
-  - {fileID: 21300000, guid: b91d2bfe00c044549b2441a9f40cdd6e, type: 3}
-  - {fileID: 21300000, guid: 6a4b004e7bdcf9c42a15d98667a0d1f4, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99fc49f12847930469407dc346883471, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -13,6 +13,9 @@ public interface StageInterface
     bool WinConditionReached();
     void ObjectiveCollected();
     void SetStageResult(StageResult result);
+    StageResult GetStageResult();
+    int GetObjectiveCounter();
+    void ResetObjectiveCounter();
 
 }
 public enum StageResult

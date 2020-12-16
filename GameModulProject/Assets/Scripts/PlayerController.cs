@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
+
     public Sprite[] sprites;
     public bool PlayerFollowMouse = true;
     public bool PlayerCanGetHit = true;
+    public AudioClip AudioGetHit;
 
     public float puRemoveObjectsRadius = 10f;
     public int maxHealth = 5;
@@ -17,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 bounds;
 
     private float invulTimer = 0f;
-    private float rotationSpeed = 0.5f;
+    private float rotationSpeed = -0.5f;
     private bool PlayerIsInvul = false;
 
     public int Health { get; private set; }
@@ -28,16 +31,18 @@ public class PlayerController : MonoBehaviour
     {
         game = GameManager.Instance;
         bounds = game.PlayerBounds;
-        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 3)];
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, 4)];
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
 
         Health = maxHealth;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(PlayerFollowMouse)
+
+        if (PlayerFollowMouse)
         {
             movePlayerToMouse();
         }
@@ -70,6 +75,8 @@ public class PlayerController : MonoBehaviour
         {
             invulTimer += 1f;
             Health--;
+            AudioManager.Instance.PlaySound(AudioGetHit);
+            Camera.main.GetComponent<CameraShake>().shakeDuration = 0.18f;
         }
         if(Health <= 0)
         {
@@ -77,10 +84,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RefillHealth()
+    {
+        Health = maxHealth;
+    }
 
     public void PowerUpShield()
     {
-        invulTimer += puInvulTime;   
+        invulTimer += puInvulTime;
     }
 
     public void PowerUpHeart()
@@ -106,10 +117,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 50, 50), sprites[0].texture);
-    }
+
 
     private void movePlayerToMouse()
     {
