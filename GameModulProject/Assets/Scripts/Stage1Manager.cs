@@ -8,7 +8,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     //Obstacles
     public float asteroidDelay = 1f;
     public float asteroidRepeat = 1f;
-    public int asteroidAmountMin = 1;
+    public int asteroidAmountMin = 2;
     public int asteroidAmountMax = 4;
     public float movementXmin = -1;
     public float movementXmax = -1;
@@ -17,7 +17,7 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public float speedMin = 5f;
     public float speedMax = 15f;
     public float scaleMin = 0.5f;
-    public float scaleMax = 2.5f;
+    public float scaleMax = 1.5f;
 
     public int objectiveLimit = 5;
     public float objectiveSpawnDelay = 5f;

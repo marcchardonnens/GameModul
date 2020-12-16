@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
                 //Fade out/in animation maybe
 
-                Wait(3, GameState.InitiateStage1);
+                Wait(1, GameState.InitiateStage1);
 
                 break;
             case GameState.Endgame:

@@ -65,7 +65,7 @@ public class GUIManager : MonoBehaviour
         int objCounter = 0;
         if(game.CurrentStage != null)
         {
-            game.CurrentStage.GetObjectiveCounter();
+            objCounter = game.CurrentStage.GetObjectiveCounter();
         }
         GUI.Label(new Rect(40, 10, 140, 40), " X " + objCounter);
         GUI.Label(new Rect(130, 10, 40, 40), imgHeart.texture);
@@ -74,6 +74,6 @@ public class GUIManager : MonoBehaviour
 
     private void MoveBackground()
     {
-
+        //TODO
     }
 }

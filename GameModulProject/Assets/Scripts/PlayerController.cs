@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
             invulTimer += 1f;
             Health--;
             AudioManager.Instance.PlaySound(AudioGetHit);
+            Camera.main.GetComponent<CameraShake>().shakeDuration = 0.18f;
         }
         if(Health <= 0)
         {
