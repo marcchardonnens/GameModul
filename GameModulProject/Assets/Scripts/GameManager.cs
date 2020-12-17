@@ -145,30 +145,78 @@ public class GameManager : MonoBehaviour
                 if(intermissionStage.PlayerHasChosen())
                 {
                     CurrentStage.ResetObjectiveCounter();
+                    CurrentStage = null;
                     gameState = GameState.EndIntermission1;
                 }
                 break;
             case GameState.EndIntermission1:
                 intermissionStage.EndStage();
-                gameState = GameState.Stage2;
+                gameState = GameState.InitiateStage2;
                 break;
             case GameState.InitiateStage2:
+                CurrentStage = StageFactory.CreateStage2Manager(this.gameObject, Obstacles, Objective, Powerups);
+                CurrentStage.EnterStage();
+                gameState = GameState.Stage2;
                 break;
             case GameState.Stage2:
+                CurrentStage.ExecuteStage();
+                if (EndingConditionReached())
+                {
+                    gameState = GameState.EndStage2;
+                }
                 break;
             case GameState.EndStage2:
+                CurrentStage.EndStage();
+                if (CurrentStage.GetStageResult() == StageResult.Win)
+                {
+                    Wait(5, GameState.InitiateIntermission2);
+                }
+                else
+                {
+                    //Wait(5, GameState.Endgame);
+                    gameState = GameState.Endgame;
+                }
+                //CurrentStage.ResetObjectiveCounter();
                 break;
             case GameState.InitiateIntermission2:
+                intermissionStage = StageFactory.CreateIntermissionStage(this.gameObject, ShieldUpgrade, SpeedUpgrade, Alien);
+                intermissionStage.EnterStage();
+                gameState = GameState.Intermission2;
                 break;
             case GameState.Intermission2:
+                if (intermissionStage.PlayerHasChosen())
+                {
+                    CurrentStage.ResetObjectiveCounter();
+                    gameState = GameState.EndIntermission2;
+                }
                 break;
             case GameState.EndIntermission2:
+                intermissionStage.EndStage();
+                gameState = GameState.InitiateStage3;
                 break;
             case GameState.InitiateStage3:
+                CurrentStage = StageFactory.CreateStage3Manager(this.gameObject, Obstacles, Objective, Powerups);
+                CurrentStage.EnterStage();
+                gameState = GameState.Stage3;
                 break;
             case GameState.Stage3:
+                CurrentStage.ExecuteStage();
+                if (EndingConditionReached())
+                {
+                    gameState = GameState.EndStage3;
+                }
                 break;
             case GameState.EndStage3:
+                CurrentStage.EndStage();
+                if (CurrentStage.GetStageResult() == StageResult.Win)
+                {
+                    Wait(5, GameState.InitiateStage3);
+                }
+                else
+                {
+                    //Wait(5, GameState.Endgame);
+                    gameState = GameState.Endgame;
+                }
                 break;
             case GameState.InitiateIntermission3:
                 break;
@@ -202,12 +250,14 @@ public class GameManager : MonoBehaviour
     {
         intermissionStage.SignalPlayerChoice();
         playerHasShieldUpgrade = true;
+        playerController.ApplyShieldUpgrade();
     }
 
     public void ApplySpeedUpgrade()
     {
         intermissionStage.SignalPlayerChoice();
         playerHasSpeedUpgrade = true;
+        playerController.ApplySpeedUpgrade();
     }
 
     public bool HasShieldUpgrade()

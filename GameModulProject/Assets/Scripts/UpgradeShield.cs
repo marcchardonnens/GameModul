@@ -29,7 +29,7 @@ public class UpgradeShield : MonoBehaviour
             else
             {
                 timer = hoverTimer;
-                game.ApplySpeedUpgrade();
+                game.ApplyShieldUpgrade();
                 Destroy(this.gameObject);
             }
         }

@@ -12,6 +12,22 @@ public static class StageFactory
         stage1Manager.SetPowerups(Powerups);
         return stage1Manager;
     }
+        public static Stage2Manager CreateStage2Manager(GameObject parent, GameObject[] Obstacles, GameObject Objective, GameObject[] Powerups)
+    {
+        Stage2Manager stage2Manager = parent.AddComponent<Stage2Manager>();
+        stage2Manager.SetObstacles(Obstacles);
+        stage2Manager.SetObjective(Objective);
+        stage2Manager.SetPowerups(Powerups);
+        return stage2Manager;
+    }
+    public static Stage3Manager CreateStage3Manager(GameObject parent, GameObject[] Obstacles, GameObject Objective, GameObject[] Powerups)
+    {
+        Stage3Manager stage3Manager = parent.AddComponent<Stage3Manager>();
+        stage3Manager.SetObstacles(Obstacles);
+        stage3Manager.SetObjective(Objective);
+        stage3Manager.SetPowerups(Powerups);
+        return stage3Manager;
+    }
 
     public static IntermissionStage CreateIntermissionStage(GameObject parent, GameObject shieldUpgrade, GameObject speedUpgrade, GameObject Alien)
     {

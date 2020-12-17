@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-        nRandomSpriteColor = Random.Range(0, spriteArraySize);
+        nRandomSpriteColor = Random.Range(0, sprites.Length);
         spriteRenderer.sprite = sprites[nRandomSpriteColor];
     }
 

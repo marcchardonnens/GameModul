@@ -38,32 +38,46 @@ public class IntermissionStage : MonoBehaviour
         switch (state)
         {
             case IntermissionState.AlienEntering:
-                if(speedUpgrade.transform.position.x > -5)
+
+                //speedUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                //shieldUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                //alien.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                if (speedUpgrade != null)
                 {
-                    //speedUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
-                    //shieldUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
-                    //alien.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
-                    if(speedUpgrade != null)
+                    if (speedUpgrade.transform.position.x > -5)
                     {
                         speedUpgrade.transform.position += new Vector3(-1f, 0, 0) * speed;
                     }
-                    if(shieldUpgrade != null)
+                }
+                if (shieldUpgrade != null)
+                {
+                    if (shieldUpgrade.transform.position.x > 5)
                     {
                         shieldUpgrade.transform.position += new Vector3(-1f, 0, 0) * speed;
                     }
-                    if(alien != null)
+                }
+                if (alien != null)
+                {
+                    if (alien.transform.position.x > 7)
                     {
                         alien.transform.position += new Vector3(-1f, 0, 0) * speed;
+                    }
+                    else
+                    {
+                        //speedUpgrade.transform.position = new Vector3(-5, 3, 1);
+                        //shieldUpgrade.transform.position = new Vector3(5, 3, 1);
+                        //alien.transform.position = new Vector3(7, -2, 1);
+                        state = IntermissionState.PlayerChoosing;
+
                     }
                 }
                 else
                 {
-                    //speedUpgrade.transform.position = new Vector3(-5, 3, 1);
-                    //shieldUpgrade.transform.position = new Vector3(5, 3, 1);
-                    //alien.transform.position = new Vector3(7, -2, 1);
-                    state = IntermissionState.PlayerChoosing;
-
-                }
+                    //debug if the above somehow fails
+                    state = IntermissionState.AlienLeaving;
+                }    
+                
+                
                 break;
             case IntermissionState.PlayerChoosing:
 

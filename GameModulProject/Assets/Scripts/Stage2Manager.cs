@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage1Manager : MonoBehaviour, StageInterface
+public class Stage2Manager : MonoBehaviour, StageInterface
 {
     public const float speedUpgradeModifier = 0.75f;
 
@@ -11,10 +11,10 @@ public class Stage1Manager : MonoBehaviour, StageInterface
     public float asteroidRepeat = 1f;
     public int asteroidAmountMin = 2;
     public int asteroidAmountMax = 4;
-    public float movementXmin = -1;
-    public float movementXmax = -1;
-    public float movementYmin = -0.25f;
-    public float movementYmax = 0.25f;
+    public float movementXmin = -0.25f;
+    public float movementXmax = 0.25f;
+    public float movementYmin = -1f;
+    public float movementYmax = -1f;
     public float speedMin = 5f;
     public float speedMax = 15f;
     public float scaleMin = 1f;
@@ -67,11 +67,11 @@ public class Stage1Manager : MonoBehaviour, StageInterface
         int obstacleAmount = Random.Range(asteroidAmountMin, asteroidAmountMax);
         for (int i = 0; i < obstacleAmount; i++)
         {
-            GameObject ago = Instantiate(Obstacles[Random.Range(0, Obstacles.Length)], new Vector3(game.ScreenBounds.x * spawnOffset, Random.Range(-game.ScreenBounds.y, game.ScreenBounds.y)), Quaternion.identity);
+            GameObject ago = Instantiate(Obstacles[Random.Range(0, Obstacles.Length)], new Vector3(Random.Range(-game.ScreenBounds.x, game.ScreenBounds.x), game.ScreenBounds.y * spawnOffset), Quaternion.identity);
             Asteroid a = ago.GetComponent<Asteroid>();
-            a.SetMovement(new Vector2(Random.Range(movementXmin,movementXmax), Random.Range(movementYmin,movementYmax)));
+            a.SetMovement(new Vector2(Random.Range(movementXmin, movementXmax), Random.Range(movementYmin, movementYmax)));
             float speed = Random.Range(5f, 15f);
-            if(game.HasSpeedUpgrade())
+            if (game.HasSpeedUpgrade())
             {
                 speed *= speedUpgradeModifier;
             }
@@ -85,7 +85,7 @@ public class Stage1Manager : MonoBehaviour, StageInterface
 
     public void SpawnPowerups()
     {
-        GameObject go = Instantiate(Powerups[Random.Range(0, 3)], new Vector3(game.ScreenBounds.x * 2, Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
+        GameObject go = Instantiate(Powerups[Random.Range(0, Powerups.Length)], new Vector3(game.ScreenBounds.x * 2, Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
 
 
         Debug.Log("Powerup Spawned");
@@ -98,7 +98,7 @@ public class Stage1Manager : MonoBehaviour, StageInterface
         //Objective obj = go.GetComponent<Objective>();
 
         Debug.Log("Objective Spawned");
-        
+
     }
 
     public void EnterStage()
