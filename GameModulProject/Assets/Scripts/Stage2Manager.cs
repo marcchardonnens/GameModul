@@ -231,4 +231,9 @@ public class Stage2Manager : MonoBehaviour, StageInterface
     {
         objectiveCounter = 0;
     }
+
+    public int GetObjectiveLimit()
+    {
+        return objectiveLimit;
+    }
 }

@@ -67,9 +67,16 @@ public class GUIManager : MonoBehaviour
         {
             objCounter = game.CurrentStage.GetObjectiveCounter();
         }
-        GUI.Label(new Rect(40, 10, 140, 40), " X " + objCounter);
+        if(game.CurrentStage != null)
+        {
+            GUI.Label(new Rect(40, 10, 140, 40), " " + objCounter + "/" + game.CurrentStage.GetObjectiveLimit());
+        }
+        else
+        {
+            GUI.Label(new Rect(40, 10, 140, 40), " " + objCounter);
+        }
         GUI.Label(new Rect(130, 10, 40, 40), imgHeart.texture);
-        GUI.Label(new Rect(170, 10, 140, 40), " X " + game.playerController.Health);
+        GUI.Label(new Rect(170, 10, 140, 40), " " + game.playerController.Health + "/" + game.playerController.maxHealth);
     }
 
     private void MoveBackground()
