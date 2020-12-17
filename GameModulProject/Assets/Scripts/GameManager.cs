@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] Obstacles;
     public GameObject Objective;
     public GameObject[] Powerups;
-    public GameObject[] Upgrades;
+    public GameObject ShieldUpgrade;
+    public GameObject SpeedUpgrade;
+    public GameObject Alien;
     public GameObject[] Bombs;
     public GameObject player;
     public AudioClip AudioStageComplete;
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
     private bool playerHasShieldUpgrade = false;
     private bool playerHasSpeedUpgrade = false;
 
-
+    private IntermissionStage stage;
 
     public void Awake()
     {
@@ -132,14 +134,23 @@ public class GameManager : MonoBehaviour
                     //Wait(5, GameState.Endgame);
                     gameState = GameState.Endgame;
                 }
-                CurrentStage.ResetObjectiveCounter();
+                //CurrentStage.ResetObjectiveCounter();
                 break;
             case GameState.InitiateIntermission1:
-                Debug.Log("Start Intermission 1");
+                stage = StageFactory.CreateIntermissionStage(this.gameObject, ShieldUpgrade, SpeedUpgrade, Alien);
+                stage.EnterStage();
+                gameState = GameState.Intermission1;
                 break;
             case GameState.Intermission1:
+                if(stage.PlayerHasChosen())
+                {
+                    CurrentStage.ResetObjectiveCounter();
+                    gameState = GameState.EndIntermission1;
+                }
                 break;
             case GameState.EndIntermission1:
+                stage.EndStage();
+                gameState = GameState.Stage2;
                 break;
             case GameState.InitiateStage2:
                 break;
