@@ -5354,6 +5354,7 @@ GameObject:
   - component: {fileID: 1584184498}
   - component: {fileID: 1584184499}
   - component: {fileID: 1584184500}
+  - component: {fileID: 1584184501}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -5419,7 +5420,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.15, y: 3.6}
+  m_Size: {x: 0.54, y: 1.23}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -5520,6 +5521,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &1584184501
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584184494}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5550bce30c37793469e7a794cc571440, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5550bce30c37793469e7a794cc571440, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1981360872
 GameObject:
   m_ObjectHideFlags: 0
