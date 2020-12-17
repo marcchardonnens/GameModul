@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         }
 
         gameState = GameState.StartScreen;
-        
+
 
         ScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.StartScreen:
                 GUIManager.Instance.OnTitleScreen();
+                playerController.RefillHealth();
                 break;
             case GameState.StartGame:
 
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.Endgame:
-                playerController.RefillHealth();
+                
                 List<MonoBehaviour> objects = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
                 objects.AddRange(FindObjectsOfType<PowerupAbstract>());
                 objects.AddRange(FindObjectsOfType<Objective>());
@@ -109,6 +110,8 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(obj.gameObject);
                 }
+                playerHasShieldUpgrade = false;
+                playerHasSpeedUpgrade = false;
                 Wait(4, GameState.StartScreen);
                 break;
             case GameState.InitiateStage1:

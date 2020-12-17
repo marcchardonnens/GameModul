@@ -11,14 +11,41 @@ public class Stage2Manager : MonoBehaviour, StageInterface
     public float asteroidRepeat = 1f;
     public int asteroidAmountMin = 2;
     public int asteroidAmountMax = 4;
-    public float movementXmin = -0.25f;
-    public float movementXmax = 0.25f;
-    public float movementYmin = -1f;
-    public float movementYmax = -1f;
-    public float speedMin = 5f;
-    public float speedMax = 15f;
-    public float scaleMin = 1f;
-    public float scaleMax = 2f;
+    public float asteroidMovementXmin = -0.25f;
+    public float asteroidMovementXmax = 0.25f;
+    public float asteroidMovementYmin = -1f;
+    public float asteroidMovementYmax = -1f;
+    public float asteroidSpeedMin = 5f;
+    public float asteroidSpeedMax = 15f;
+    public float asteroidScaleMin = 3f;
+    public float asteroidScaleMax = 4f;
+
+    public float frachtDelay = 1f;
+    public float frachtRepeat = 1f;
+    public int frachtAmountMin = 2;
+    public int frachtAmountMax = 4;
+    public float frachtMovementXmin = -0.25f;
+    public float frachtMovementXmax = 0.25f;
+    public float frachtMovementYmin = -1f;
+    public float frachtMovementYmax = -1f;
+    public float frachtSpeedMin = 5f;
+    public float frachtSpeedMax = 15f;
+    public float frachtScaleMin = 1.5f;
+    public float frachtScaleMax = 2.5f;
+
+    public float messerDelay = 1f;
+    public float messerRepeat = 1f;
+    public int messerAmountMin = 2;
+    public int messerAmountMax = 4;
+    public float messerMovementXmin = -0.25f;
+    public float messerMovementXmax = 0.25f;
+    public float messerMovementYmin = -1f;
+    public float messerMovementYmax = -1f;
+    public float messerSpeedMin = 5f;
+    public float messerSpeedMax = 15f;
+    public float messerScaleMin = 0.25f;
+    public float messerScaleMax = 1f;
+
 
     public int objectiveLimit = 1;
     public float objectiveSpawnDelay = 5f;
@@ -61,34 +88,82 @@ public class Stage2Manager : MonoBehaviour, StageInterface
         this.Powerups = Powerups;
     }
 
-
     public void SpawnObstacles()
     {
-        int obstacleAmount = Random.Range(asteroidAmountMin, asteroidAmountMax);
-        for (int i = 0; i < obstacleAmount; i++)
+        InvokeRepeating("SpawnAsteroids", asteroidDelay, asteroidRepeat);
+        InvokeRepeating("SpawnFracht", frachtDelay, frachtRepeat);
+        InvokeRepeating("SpawnMesser", messerDelay, messerRepeat);
+    }
+
+    public void SpawnAsteroids()
+    {
+        GameObject asteroid = Obstacles[0];
+        int asteroidAmount = Random.Range(asteroidAmountMin, asteroidAmountMax);
+        for (int i = 0; i < asteroidAmount; i++)
         {
-            GameObject ago = Instantiate(Obstacles[Random.Range(0, Obstacles.Length)], new Vector3(Random.Range(-game.ScreenBounds.x, game.ScreenBounds.x), game.ScreenBounds.y * spawnOffset), Quaternion.identity);
+            GameObject ago = Instantiate(asteroid, spawnPoint(), Quaternion.identity);
             Asteroid a = ago.GetComponent<Asteroid>();
-            a.SetMovement(new Vector2(Random.Range(movementXmin, movementXmax), Random.Range(movementYmin, movementYmax)));
-            float speed = Random.Range(5f, 15f);
+            a.SetMovement(new Vector2(Random.Range(asteroidMovementXmin, asteroidMovementXmax), Random.Range(asteroidMovementYmin, asteroidMovementYmax)));
+            float speed = Random.Range(asteroidSpeedMin, asteroidSpeedMax);
             if (game.HasSpeedUpgrade())
             {
                 speed *= speedUpgradeModifier;
             }
             a.SetSpeed(speed);
-            float scaleAmount = Random.Range(0.5f, 2.5f);
+            float scaleAmount = Random.Range(asteroidScaleMin, asteroidScaleMax);
             a.transform.localScale += new Vector3(scaleAmount, scaleAmount, scaleAmount);
-
-            //asteroid.SendMessage
         }
+    }
+
+    public void SpawnFracht()
+    {
+        GameObject fracht = Obstacles[1];
+        int frachtAmount = Random.Range(frachtAmountMin, frachtAmountMax);
+        for (int i = 0; i < frachtAmount; i++)
+        {
+            GameObject ago = Instantiate(fracht, spawnPoint(), Quaternion.identity);
+            Asteroid a = ago.GetComponent<Asteroid>();
+            a.SetMovement(new Vector2(Random.Range(frachtMovementXmin, frachtMovementXmax), Random.Range(frachtMovementYmin, frachtMovementYmax)));
+            float speed = Random.Range(frachtSpeedMin, frachtSpeedMax);
+            if (game.HasSpeedUpgrade())
+            {
+                speed *= speedUpgradeModifier;
+            }
+            a.SetSpeed(speed);
+            float scaleAmount = Random.Range(frachtScaleMin, frachtScaleMax);
+            a.transform.localScale += new Vector3(scaleAmount, scaleAmount, scaleAmount);
+        }
+    }
+
+    public void SpawnMesser()
+    {
+        GameObject messer = Obstacles[2];
+        int messerAmount = Random.Range(messerAmountMin, messerAmountMax);
+        for (int i = 0; i < messerAmount; i++)
+        {
+            GameObject ago = Instantiate(messer, spawnPoint(), Quaternion.identity);
+            Asteroid a = ago.GetComponent<Asteroid>();
+            a.SetMovement(new Vector2(Random.Range(messerMovementXmin, messerMovementXmax), Random.Range(messerMovementYmin, messerMovementYmax)));
+            float speed = Random.Range(messerSpeedMin, messerSpeedMax);
+            if (game.HasSpeedUpgrade())
+            {
+                speed *= speedUpgradeModifier;
+            }
+            a.SetSpeed(speed);
+            float scaleAmount = Random.Range(messerScaleMin, messerScaleMax);
+            a.transform.localScale += new Vector3(scaleAmount, scaleAmount, scaleAmount);
+        }
+    }
+    private Vector3 spawnPoint()
+    {
+        return new Vector3(Random.Range(-game.ScreenBounds.x, game.ScreenBounds.x), game.ScreenBounds.y * spawnOffset);
     }
 
     public void SpawnPowerups()
     {
-        GameObject go = Instantiate(Powerups[Random.Range(0, Powerups.Length)], new Vector3(game.ScreenBounds.x * 2, Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
-
-
-        Debug.Log("Powerup Spawned");
+        GameObject go = Instantiate(Powerups[Random.Range(0, Powerups.Length)], spawnPoint(), Quaternion.identity);
+        PowerupAbstract pa = go.GetComponent<PowerupAbstract>();
+        pa.SetDirection(new Vector2(0, -1));
 
     }
 
@@ -97,13 +172,11 @@ public class Stage2Manager : MonoBehaviour, StageInterface
         GameObject go = Instantiate(Objective, new Vector3(Random.Range(-game.PlayerBounds.x, game.PlayerBounds.x), Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
         //Objective obj = go.GetComponent<Objective>();
 
-        Debug.Log("Objective Spawned");
-
     }
 
     public void EnterStage()
     {
-        InvokeRepeating("SpawnObstacles", asteroidDelay, asteroidRepeat);
+        SpawnObstacles();
         InvokeRepeating("SpawnPowerups", PowerupSpawnDelay, PowerupSpawnDelay);
         Invoke("SpawnObjective", objectiveSpawnDelay);
     }
@@ -113,7 +186,9 @@ public class Stage2Manager : MonoBehaviour, StageInterface
 
         //stop invoke repeating calls
 
-        CancelInvoke("SpawnObstacles");
+        CancelInvoke("SpawnAsteroids");
+        CancelInvoke("SpawnFracht");
+        CancelInvoke("SpawnMesser");
         CancelInvoke("SpawnPowerups");
         CancelInvoke("SpawnObjective");
     }

@@ -12,7 +12,7 @@ public class Objective : MonoBehaviour
 
     private void Awake()
     {
-        game = GameManager.Instance; 
+        game = GameManager.Instance;
     }
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class Objective : MonoBehaviour
     {
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
         GetComponent<Animator>().SetInteger("nColorVariant", Random.Range(0, 4));
+        transform.localScale = new Vector3(2, 2, 2);
     }
 
     // Update is called once per frame

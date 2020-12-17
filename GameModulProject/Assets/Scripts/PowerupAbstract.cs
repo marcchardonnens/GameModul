@@ -6,6 +6,7 @@ public abstract class PowerupAbstract : MonoBehaviour
 {
     private const float speed = 0.5f;
     protected PlayerController pc;
+    public Vector2 direction;
     
 
     private void Awake()
@@ -22,6 +23,11 @@ public abstract class PowerupAbstract : MonoBehaviour
     private void Update()
     {
         GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0) * speed);
+    }
+
+    public void SetDirection(Vector2 direction)
+    {
+        this.direction = direction;
     }
 
 

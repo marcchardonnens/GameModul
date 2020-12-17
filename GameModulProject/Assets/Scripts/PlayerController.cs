@@ -171,7 +171,8 @@ public class PlayerController : MonoBehaviour
     private void movePlayerToMouse()
     {
         Vector2 mouse = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-        Vector2 newPosition = new Vector2();
+        Vector3 newPosition = new Vector3();
+        newPosition.z = -5;
 
 
         if(mouse.x > -bounds.x && mouse.x < bounds.x)
