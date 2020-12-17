@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Animator animator;
 
+
+    
+    public Sprite leiche;
     public Sprite[] sprites;
     public Sprite[] spritesWithSpeed;
     public Sprite[] spritesWithShield;
@@ -25,16 +27,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 bounds;
 
     private float invulTimer = 0f;
-    private float rotationSpeed = -0.5f;
+    private float rotationSpeed = -1f;
     private bool PlayerIsInvul = false;
+    private float shieldTimer = 0f;
 
     private const int spriteArraySize = 4;
     private const float cameraShakeDuration = 0.18f;
     private int nRandomSpriteColor = 0;
     private SpriteRenderer spriteRenderer;
+    public GameObject shield;
+    private Vector3 shieldInvisPosition = new Vector3(100, 100, -6);
 
     public int Health { get; private set; }
 
+    private void Awake()
+    {
+        shield = Instantiate(shield, shieldInvisPosition, Quaternion.identity);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +86,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(shieldTimer > 0)
+        {
+            shieldTimer -= Time.deltaTime;
+            shield.transform.position = transform.position;
+        }
+        else
+        {
+            shieldTimer = 0;
+            shield.transform.position = shieldInvisPosition;
+        }
+
+
     }
 
     public void GetHit()
@@ -102,6 +123,7 @@ public class PlayerController : MonoBehaviour
     public void PowerUpShield()
     {
         invulTimer += puInvulTime;
+        shieldTimer += puInvulTime;
     }
 
     public void PowerUpHeart()
@@ -129,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
-
+        GetComponent<Animation>().Play();
     }
 
 

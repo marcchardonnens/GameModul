@@ -89,11 +89,13 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.StartScreen:
+                playerController.PlayerCanGetHit = false;
+                //start animation
                 GUIManager.Instance.OnTitleScreen();
                 playerController.RefillHealth();
                 break;
             case GameState.StartGame:
-
+                playerController.PlayerCanGetHit = false;
                 GUIManager.Instance.OnGameStart();
 
                 //Fade out/in animation maybe
@@ -101,8 +103,8 @@ public class GameManager : MonoBehaviour
                 Wait(1, GameState.InitiateStage1);
 
                 break;
-            case GameState.Endgame:
-                
+            case GameState.EndGameLoss:
+                playerController.PlayerCanGetHit = false;
                 List<MonoBehaviour> objects = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
                 objects.AddRange(FindObjectsOfType<PowerupAbstract>());
                 objects.AddRange(FindObjectsOfType<Objective>());
@@ -114,12 +116,18 @@ public class GameManager : MonoBehaviour
                 playerHasSpeedUpgrade = false;
                 Wait(4, GameState.StartScreen);
                 break;
+            case GameState.EndGameWin:
+                playerController.PlayerCanGetHit = false;
+                //end game animation
+                break;
             case GameState.InitiateStage1:
+                playerController.PlayerCanGetHit = false;
                 CurrentStage = StageFactory.CreateStage1Manager(this.gameObject, Obstacles, Objective, Powerups);
                 CurrentStage.EnterStage();
                 gameState = GameState.Stage1;
                 break;
             case GameState.Stage1:
+                playerController.PlayerCanGetHit = true;
                 CurrentStage.ExecuteStage();
                 if(EndingConditionReached())
                 {
@@ -127,6 +135,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.EndStage1:
+                playerController.PlayerCanGetHit = false;
                 CurrentStage.EndStage();
                 if(CurrentStage.GetStageResult() == StageResult.Win)
                 {
@@ -135,17 +144,19 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //Wait(5, GameState.Endgame);
-                    gameState = GameState.Endgame;
+                    gameState = GameState.EndGameLoss;
                 }
                 //CurrentStage.ResetObjectiveCounter();
                 break;
             case GameState.InitiateIntermission1:
+                playerController.PlayerCanGetHit = false;
                 intermissionStage = StageFactory.CreateIntermissionStage(this.gameObject, ShieldUpgrade, SpeedUpgrade, Alien);
                 intermissionStage.EnterStage();
                 gameState = GameState.Intermission1;
                 break;
             case GameState.Intermission1:
-                if(intermissionStage.PlayerHasChosen())
+                playerController.PlayerCanGetHit = false;
+                if (intermissionStage.PlayerHasChosen())
                 {
                     CurrentStage.ResetObjectiveCounter();
                     CurrentStage = null;
@@ -153,15 +164,18 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.EndIntermission1:
+                playerController.PlayerCanGetHit = false;
                 intermissionStage.EndStage();
                 gameState = GameState.InitiateStage2;
                 break;
             case GameState.InitiateStage2:
+                playerController.PlayerCanGetHit = false;
                 CurrentStage = StageFactory.CreateStage2Manager(this.gameObject, Obstacles, Objective, Powerups);
                 CurrentStage.EnterStage();
                 gameState = GameState.Stage2;
                 break;
             case GameState.Stage2:
+                playerController.PlayerCanGetHit = true;
                 CurrentStage.ExecuteStage();
                 if (EndingConditionReached())
                 {
@@ -177,7 +191,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //Wait(5, GameState.Endgame);
-                    gameState = GameState.Endgame;
+                    gameState = GameState.EndGameLoss;
                 }
                 //CurrentStage.ResetObjectiveCounter();
                 break;
@@ -218,7 +232,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     //Wait(5, GameState.Endgame);
-                    gameState = GameState.Endgame;
+                    gameState = GameState.EndGameLoss;
                 }
                 break;
             case GameState.InitiateIntermission3:
@@ -305,7 +319,8 @@ public class GameManager : MonoBehaviour
         Wait,
         StartScreen,
         StartGame,
-        Endgame,
+        EndGameLoss,
+        EndGameWin,
 
 
 

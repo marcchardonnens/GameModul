@@ -22,7 +22,7 @@ public abstract class PowerupAbstract : MonoBehaviour
 
     private void Update()
     {
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0) * speed);
+        GetComponent<Rigidbody2D>().AddForce(direction * speed);
     }
 
     public void SetDirection(Vector2 direction)

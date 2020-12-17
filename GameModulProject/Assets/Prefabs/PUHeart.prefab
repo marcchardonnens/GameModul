@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5197733293247193465}
   - component: {fileID: 4430748778407499630}
   - component: {fileID: 2987279204140281189}
-  - component: {fileID: 6375604223994701403}
+  - component: {fileID: 6193465443002922887}
   m_Layer: 10
   m_Name: PUHeart
   m_TagString: Untagged
@@ -144,8 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe5be45f728a914490615b5fea18e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0}
   Sound: {fileID: 8300000, guid: e8ab0d9bc3141664da701a80366ea4f0, type: 3}
---- !u!95 &6375604223994701403
+--- !u!95 &6193465443002922887
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -155,7 +156,7 @@ Animator:
   m_GameObject: {fileID: 8233752734548977390}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 37cef69e1ba6244ebb8f1fe55a0f3dd1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9e5d058e0e9eb41ecb00a306bb7614a1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
