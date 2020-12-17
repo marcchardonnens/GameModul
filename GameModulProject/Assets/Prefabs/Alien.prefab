@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7635686514655441448}
   - component: {fileID: 7635686514655441455}
   - component: {fileID: 7635686514655441454}
+  - component: {fileID: -678557065741419253}
   m_Layer: 0
   m_Name: Alien
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7635686514655441453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.68, y: -2.06, z: 0}
+  m_LocalPosition: {x: 7, y: -2, z: 1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,3 +102,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-678557065741419253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635686514655441453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ce44f133eaa4441b434bd7d6128341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

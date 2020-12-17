@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class PowerupAbstract : MonoBehaviour
 {
+    private const float speed = 0.5f;
     protected PlayerController pc;
     
 
@@ -16,6 +17,11 @@ public abstract class PowerupAbstract : MonoBehaviour
     {
         Activate();
         Destroy(this.gameObject);
+    }
+
+    private void Update()
+    {
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(-1, 0) * speed);
     }
 
 

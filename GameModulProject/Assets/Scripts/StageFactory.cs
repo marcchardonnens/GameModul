@@ -13,6 +13,16 @@ public static class StageFactory
         return stage1Manager;
     }
 
+    public static IntermissionStage CreateIntermissionStage(GameObject parent, GameObject shieldUpgrade, GameObject speedUpgrade, GameObject Alien)
+    {
+        IntermissionStage stage = parent.AddComponent<IntermissionStage>();
+        stage.SetSpeedUpgrade(speedUpgrade);
+        stage.SetShieldUpgrade(shieldUpgrade);
+        stage.SetAlien(Alien);
+
+        return stage;
+    }
+
 
 
 

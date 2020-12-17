@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     private bool playerHasShieldUpgrade = false;
     private bool playerHasSpeedUpgrade = false;
 
-    private IntermissionStage stage;
+    private IntermissionStage intermissionStage;
 
     public void Awake()
     {
@@ -137,19 +137,19 @@ public class GameManager : MonoBehaviour
                 //CurrentStage.ResetObjectiveCounter();
                 break;
             case GameState.InitiateIntermission1:
-                stage = StageFactory.CreateIntermissionStage(this.gameObject, ShieldUpgrade, SpeedUpgrade, Alien);
-                stage.EnterStage();
+                intermissionStage = StageFactory.CreateIntermissionStage(this.gameObject, ShieldUpgrade, SpeedUpgrade, Alien);
+                intermissionStage.EnterStage();
                 gameState = GameState.Intermission1;
                 break;
             case GameState.Intermission1:
-                if(stage.PlayerHasChosen())
+                if(intermissionStage.PlayerHasChosen())
                 {
                     CurrentStage.ResetObjectiveCounter();
                     gameState = GameState.EndIntermission1;
                 }
                 break;
             case GameState.EndIntermission1:
-                stage.EndStage();
+                intermissionStage.EndStage();
                 gameState = GameState.Stage2;
                 break;
             case GameState.InitiateStage2:
@@ -200,11 +200,13 @@ public class GameManager : MonoBehaviour
 
     public void ApplyShieldUpgrade()
     {
+        intermissionStage.SignalPlayerChoice();
         playerHasShieldUpgrade = true;
     }
 
     public void ApplySpeedUpgrade()
     {
+        intermissionStage.SignalPlayerChoice();
         playerHasSpeedUpgrade = true;
     }
 

@@ -30,9 +30,14 @@ public class UpgradeSpeed : MonoBehaviour
             {
                 timer = hoverTimer;
                 game.ApplySpeedUpgrade();
+                Destroy(this.gameObject);
             }
         }
 
+        if (transform.position.y < game.ScreenBounds.y * -3)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

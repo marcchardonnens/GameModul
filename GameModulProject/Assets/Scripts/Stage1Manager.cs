@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stage1Manager : MonoBehaviour,StageInterface
 {
     public const float speedUpgradeModifier = 0.75f;
-    private const int nObstaclesArraySize = 5;
+    private const int nObstaclesArraySize = 3;
 
     //Obstacles
     public float asteroidDelay = 1f;
@@ -18,10 +18,10 @@ public class Stage1Manager : MonoBehaviour,StageInterface
     public float movementYmax = 0.25f;
     public float speedMin = 5f;
     public float speedMax = 15f;
-    public float scaleMin = 0.25f;
-    public float scaleMax = 1f;
+    public float scaleMin = 1f;
+    public float scaleMax = 2f;
 
-    public int objectiveLimit = 5;
+    public int objectiveLimit = 1;
     public float objectiveSpawnDelay = 5f;
 
     public float PowerupSpawnDelay = 5f;
@@ -86,7 +86,9 @@ public class Stage1Manager : MonoBehaviour,StageInterface
 
     public void SpawnPowerups()
     {
-        GameObject go = Instantiate(Powerups[Random.Range(0, 3)], new Vector3(Random.Range(-game.PlayerBounds.x, game.PlayerBounds.x), Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
+        GameObject go = Instantiate(Powerups[Random.Range(0, 3)], new Vector3(game.ScreenBounds.x * 2, Random.Range(-game.PlayerBounds.y, game.PlayerBounds.y)), Quaternion.identity);
+
+
         Debug.Log("Powerup Spawned");
 
     }

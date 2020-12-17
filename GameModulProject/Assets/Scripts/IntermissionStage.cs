@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class IntermissionStage : MonoBehaviour
 {
-    private const float speed = 2f;
+    private GameObject PFspeedUpgrade;
+    private GameObject PFshieldUpgrade;
+    private GameObject PFalien;
+
+    private const float speed = 0.25f;
     private GameObject speedUpgrade;
     private GameObject shieldUpgrade;
     private GameObject alien;
@@ -14,6 +18,12 @@ public class IntermissionStage : MonoBehaviour
     private GameManager game;
 
     private IntermissionState state;
+
+
+    private void Awake()
+    {
+        state = IntermissionState.Default;
+    }
 
 
     // Start is called before the first frame update
@@ -30,32 +40,54 @@ public class IntermissionStage : MonoBehaviour
             case IntermissionState.AlienEntering:
                 if(speedUpgrade.transform.position.x > -5)
                 {
-                    speedUpgrade.transform.position += new Vector3(-1f, 0, 0);// * speed;
-                    shieldUpgrade.transform.position += new Vector3(-1f, 0, 0);// * speed;
-                    alien.transform.position += new Vector3(-1f, 0, 0);// * speed;
+                    //speedUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                    //shieldUpgrade.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                    //alien.GetComponent<Rigidbody2D>().AddForce(new Vector2(-speed, 0));
+                    if(speedUpgrade != null)
+                    {
+                        speedUpgrade.transform.position += new Vector3(-1f, 0, 0) * speed;
+                    }
+                    if(shieldUpgrade != null)
+                    {
+                        shieldUpgrade.transform.position += new Vector3(-1f, 0, 0) * speed;
+                    }
+                    if(alien != null)
+                    {
+                        alien.transform.position += new Vector3(-1f, 0, 0) * speed;
+                    }
                 }
                 else
                 {
-                    speedUpgrade.transform.position = new Vector3(-5, 3, 1);
-                    shieldUpgrade.transform.position = new Vector3(5, 3, 1);
-                    alien.transform.position = new Vector3(7, -2, 1);
-                    //state = IntermissionState.PlayerChoosing;
+                    //speedUpgrade.transform.position = new Vector3(-5, 3, 1);
+                    //shieldUpgrade.transform.position = new Vector3(5, 3, 1);
+                    //alien.transform.position = new Vector3(7, -2, 1);
+                    state = IntermissionState.PlayerChoosing;
 
                 }
                 break;
             case IntermissionState.PlayerChoosing:
 
-                //if(playerHasChosen)
-                //{
-                //    state = IntermissionState.AlienLeaving;
-                //}
+                if (playerHasChosen)
+                {
+                    state = IntermissionState.AlienLeaving;
+                }
 
 
                 break;
             case IntermissionState.AlienLeaving:
-                speedUpgrade.transform.position += new Vector3(0, -speed, 0);
-                shieldUpgrade.transform.position += new Vector3(0, -speed, 0);
-                alien.transform.position += new Vector3(0, -speed, 0);
+
+                if (speedUpgrade != null)
+                {
+                    speedUpgrade.transform.position += new Vector3(0, -1f, 0) * speed;
+                }
+                if (shieldUpgrade != null)
+                {
+                    shieldUpgrade.transform.position += new Vector3(0, -1f, 0) * speed;
+                }
+                if (alien != null)
+                {
+                    alien.transform.position += new Vector3(0, -1f, 0) * speed;
+                }
                 break;
             default:
                 break;
@@ -68,13 +100,13 @@ public class IntermissionStage : MonoBehaviour
         game = GameManager.Instance;
         if (!game.HasSpeedUpgrade())
         { 
-            Instantiate(speedUpgrade, new Vector3(game.ScreenBounds.x * 2, 3), Quaternion.identity);
+            speedUpgrade = Instantiate(PFspeedUpgrade, new Vector3(game.ScreenBounds.x * 2, 3), Quaternion.identity);
         }
         if(!game.HasShieldUpgrade())
         {
-            Instantiate(shieldUpgrade, new Vector3(game.ScreenBounds.x * 2 + 10, 3), Quaternion.identity);
+            shieldUpgrade = Instantiate(PFshieldUpgrade, new Vector3(game.ScreenBounds.x * 2 + 10, 3), Quaternion.identity);
         }
-        Instantiate(alien, new Vector3(game.ScreenBounds.x * 2 + 12, -2), Quaternion.identity);
+         alien = Instantiate(PFalien, new Vector3(game.ScreenBounds.x * 2 + 12, -2), Quaternion.identity);
         state = IntermissionState.AlienEntering;
     }
 
@@ -84,6 +116,10 @@ public class IntermissionStage : MonoBehaviour
         state = IntermissionState.AlienLeaving;
     }
 
+    public void SignalPlayerChoice()
+    {
+        playerHasChosen = true;
+    }
 
     public bool PlayerHasChosen()
     {
@@ -105,17 +141,17 @@ public class IntermissionStage : MonoBehaviour
 
     public void SetSpeedUpgrade(GameObject speedUpgrade)
     {
-        this.speedUpgrade = speedUpgrade;
+        this.PFspeedUpgrade = speedUpgrade;
     }
 
     public void SetShieldUpgrade(GameObject shieldUpgrade)
     {
-        this.shieldUpgrade = shieldUpgrade;
+        this.PFshieldUpgrade = shieldUpgrade;
     }
 
     public void SetAlien(GameObject alien)
     {
-        this.alien = alien;
+        this.PFalien = alien;
     }
 
 
