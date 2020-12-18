@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip AudioGetHit;
 
     private const int ShieldUpgradeModifier = 2;
-    public float puRemoveObjectsRadius = 10f;
+    public float puRemoveObjectsRadius = 30f;
     public int maxHealth = 5;
     public float puInvulTime = 4f;
     private const float hitImmuneTime = 1f;
@@ -135,8 +135,8 @@ public class PlayerController : MonoBehaviour
 
     public void PowerUpShield()
     {
-        invulTimer += puInvulTime;
-        shieldTimer += puInvulTime;
+        invulTimer = puInvulTime;
+        shieldTimer = puInvulTime;
     }
 
     public void PowerUpHeart()

@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Stage2Manager : MonoBehaviour, StageInterface
 {
-    public const float speedUpgradeModifier = 0.75f;
+    public const float speedUpgradeModifier = 0.6f;
 
     //Obstacles
     public float asteroidDelay = 1f;
     public float asteroidRepeat = 1f;
     public int asteroidAmountMin = 2;
-    public int asteroidAmountMax = 4;
+    public int asteroidAmountMax = 3;
     public float asteroidMovementXmin = -0.25f;
     public float asteroidMovementXmax = 0.25f;
     public float asteroidMovementYmin = -1f;
     public float asteroidMovementYmax = -1f;
-    public float asteroidSpeedMin = 5f;
-    public float asteroidSpeedMax = 15f;
-    public float asteroidScaleMin = 3f;
-    public float asteroidScaleMax = 4f;
+    public float asteroidSpeedMin = 3f;
+    public float asteroidSpeedMax = 8f;
+    public float asteroidScaleMin = 6f;
+    public float asteroidScaleMax = 9f;
 
     public float frachtDelay = 1f;
     public float frachtRepeat = 1f;
@@ -28,21 +28,21 @@ public class Stage2Manager : MonoBehaviour, StageInterface
     public float frachtMovementXmax = 0.25f;
     public float frachtMovementYmin = -1f;
     public float frachtMovementYmax = -1f;
-    public float frachtSpeedMin = 5f;
-    public float frachtSpeedMax = 15f;
+    public float frachtSpeedMin = 8f;
+    public float frachtSpeedMax = 12f;
     public float frachtScaleMin = 1.5f;
     public float frachtScaleMax = 2.5f;
 
     public float messerDelay = 1f;
-    public float messerRepeat = 1f;
+    public float messerRepeat = 3f;
     public int messerAmountMin = 2;
-    public int messerAmountMax = 4;
+    public int messerAmountMax = 3;
     public float messerMovementXmin = -0.25f;
     public float messerMovementXmax = 0.25f;
     public float messerMovementYmin = -1f;
     public float messerMovementYmax = -1f;
-    public float messerSpeedMin = 5f;
-    public float messerSpeedMax = 15f;
+    public float messerSpeedMin = 30f;
+    public float messerSpeedMax = 40f;
     public float messerScaleMin = 0.25f;
     public float messerScaleMax = 1f;
 

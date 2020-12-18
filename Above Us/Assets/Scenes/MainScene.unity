@@ -285,8 +285,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1584184495}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -524,6 +523,7 @@ Transform:
   - {fileID: 1981360873}
   - {fileID: 733579952}
   - {fileID: 1936910183}
+  - {fileID: 1584184495}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5450,7 +5450,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 63d2411df68c23a43941658f86a1868b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.694
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5562,12 +5562,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584184494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.9, y: 6, z: -5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.292187, y: 4.2966146, z: -8}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 673049076}
-  m_RootOrder: 0
+  m_Father: {fileID: 822670550}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1584184496
 SpriteRenderer:
@@ -5655,9 +5655,9 @@ MonoBehaviour:
   PlayerFollowMouse: 1
   PlayerCanGetHit: 0
   AudioGetHit: {fileID: 8300000, guid: 142b70fcf1e61bd4f884bec932a6ae16, type: 3}
-  puRemoveObjectsRadius: 10
-  maxHealth: 3
-  puInvulTime: 4
+  puRemoveObjectsRadius: 30
+  maxHealth: 5
+  puInvulTime: 6
   shield: {fileID: 6648808439530754113, guid: 75f8487ce22a37d42a00d51ad76bd5ed, type: 3}
   playerIsLeavingScreen: 0
   playerMoveTowardsMiddle: 0

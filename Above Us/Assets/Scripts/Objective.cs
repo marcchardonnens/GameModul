@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-
+    private const float scale = 1.5f;
     public AudioClip Sound;
 
     private GameManager game;
@@ -20,7 +20,7 @@ public class Objective : MonoBehaviour
     {
         transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
         GetComponent<Animator>().SetInteger("nColorVariant", Random.Range(0, 4));
-        transform.localScale = new Vector3(2, 2, 2);
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 
     // Update is called once per frame
