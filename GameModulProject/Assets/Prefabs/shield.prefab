@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47f363bf0841b3649b912a6e7bc0a28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverTimer: 3
+  hoverTimer: 1
   sound: {fileID: 8300000, guid: b58266c6958f8ee4c85449bfcebd8b65, type: 3}

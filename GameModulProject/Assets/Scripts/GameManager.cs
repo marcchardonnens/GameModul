@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
                     Instantiate(CinematicObjects[i], new Vector3(-ScreenBounds.x - 2, i * -6 + 9, 0), Quaternion.identity);
                 }
 
-                Wait(6, GameState.GameInitialize);
+                Wait(4, GameState.GameInitialize);
                 break;
             case GameState.InitiateStage1:
                 playerController.PlayerCanGetHit = false;

@@ -5,10 +5,10 @@ using UnityEngine;
 public class UpgradeSpeed : MonoBehaviour
 {
 
-    public float hoverTimer = 3f;
+    public float hoverTimer = 1f;
     public AudioClip sound;
 
-    private float timer = 3f;
+    private float timer = 1f;
     private bool timerStarted = false;
     private GameManager game;
 

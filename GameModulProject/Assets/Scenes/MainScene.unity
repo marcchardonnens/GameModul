@@ -381,8 +381,8 @@ GameObject:
   m_Component:
   - component: {fileID: 733579952}
   - component: {fileID: 733579955}
-  - component: {fileID: 733579954}
   - component: {fileID: 733579953}
+  - component: {fileID: 733579954}
   m_Layer: 0
   m_Name: GameStarter
   m_TagString: Untagged
@@ -417,8 +417,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverTimer: 3
---- !u!58 &733579954
-CircleCollider2D:
+--- !u!61 &733579954
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -430,9 +430,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 6.9849193e-10, y: 0.000000022351742}
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.96, y: 0.59}
+    newSize: {x: 0.2, y: 0.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.03
+  m_Size: {x: 2.7, y: 0.3}
+  m_EdgeRadius: 0
 --- !u!212 &733579955
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5715,6 +5725,7 @@ GameObject:
   - component: {fileID: 1936910183}
   - component: {fileID: 1936910182}
   - component: {fileID: 1936910184}
+  - component: {fileID: 1936910185}
   m_Layer: 0
   m_Name: quit_button
   m_TagString: Untagged
@@ -5799,6 +5810,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverTimer: 3
+--- !u!61 &1936910185
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936910181}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.09, y: 0.59}
+    newSize: {x: 1.09, y: 0.59}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.4}
+  m_EdgeRadius: 0
 --- !u!1 &1981360872
 GameObject:
   m_ObjectHideFlags: 0

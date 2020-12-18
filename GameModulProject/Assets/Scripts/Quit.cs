@@ -27,7 +27,7 @@ public class Quit : MonoBehaviour
             else
             {
                 timer = hoverTimer;
-                Application.Quit(0);
+                Application.Quit();
             }
         }
     }

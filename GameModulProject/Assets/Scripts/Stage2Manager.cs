@@ -47,7 +47,7 @@ public class Stage2Manager : MonoBehaviour, StageInterface
     public float messerScaleMax = 1f;
 
 
-    public int objectiveLimit = 1;
+    public int objectiveLimit = 15;
     public float objectiveSpawnDelay = 5f;
 
     public float PowerupSpawnDelay = 5f;
