@@ -269,6 +269,11 @@ MonoBehaviour:
   player: {fileID: 1584184494}
   AudioStageComplete: {fileID: 8300000, guid: 5ddf6d65e55bab54d8ad61b7b189e9ba, type: 3}
   AudioGameOver: {fileID: 8300000, guid: ef1f71f9ac336c741bdc862e7abbf44e, type: 3}
+  CinematicObjects:
+  - {fileID: 7908031660454508992, guid: 284bc97cac0faa347bdadf116fa71da4, type: 3}
+  - {fileID: 9003789109964785755, guid: b34d7bfbef18b6844bf518ea61671f27, type: 3}
+  - {fileID: 8657965526024687718, guid: 43e5055ccfb86e543bdbb090a07af7bb, type: 3}
+  - {fileID: 3047747556207598988, guid: 02aba782b38c5e14ca8f23b13c5e3cfd, type: 3}
 --- !u!4 &673049076
 Transform:
   m_ObjectHideFlags: 0
@@ -5437,7 +5442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f40328d80e0dd4e8a21f7b40de062e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: {fileID: 6648808439530754113, guid: 75f8487ce22a37d42a00d51ad76bd5ed, type: 3}
   leiche: {fileID: 21300000, guid: 40957e33ec2e743a4a7a57db63cb5933, type: 3}
   sprites:
   - {fileID: 21300000, guid: 49caf3a789f026b43afc66c309065c74, type: 3}
@@ -5465,6 +5469,9 @@ MonoBehaviour:
   puRemoveObjectsRadius: 10
   maxHealth: 3
   puInvulTime: 4
+  shield: {fileID: 6648808439530754113, guid: 75f8487ce22a37d42a00d51ad76bd5ed, type: 3}
+  playerIsLeavingScreen: 0
+  playerMoveTowardsMiddle: 0
 --- !u!50 &1584184498
 Rigidbody2D:
   serializedVersion: 4

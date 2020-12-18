@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
     public GameObject shield;
     private Vector3 shieldInvisPosition = new Vector3(100, 100, -6);
 
+    public bool playerIsLeavingScreen = false;
+    public bool playerMoveTowardsMiddle = false;
+
     public int Health { get; private set; }
 
     private void Awake()
@@ -50,10 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         game = GameManager.Instance;
         bounds = game.PlayerBounds;
-        
-        transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Health = maxHealth;
+        
+
         Respawn();
     }
 
@@ -65,6 +67,17 @@ public class PlayerController : MonoBehaviour
         {
             movePlayerToMouse();
         }
+        if(playerIsLeavingScreen)
+        {
+            transform.position += new Vector3(0.1f, 0, 0);
+        }
+        if(playerMoveTowardsMiddle)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), 0.1f);
+        }
+
+
+
         if(invulTimer > 0)
         {
             invulTimer -= Time.deltaTime;
@@ -151,12 +164,14 @@ public class PlayerController : MonoBehaviour
 
     public void Death()
     {
-        GetComponent<Animation>().Play();
+        //spriteRenderer.sprite = leiche;
     }
 
 
     public void Respawn()
     {
+        transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+        Health = maxHealth;
         nRandomSpriteColor = Random.Range(0, sprites.Length);
         spriteRenderer.sprite = sprites[nRandomSpriteColor];
     }
@@ -224,7 +239,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position = newPosition;
 
-        //Debug.Log(newPosition.ToString());
 
     }
 }

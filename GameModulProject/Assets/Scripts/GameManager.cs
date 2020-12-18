@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public AudioClip AudioStageComplete;
     public AudioClip AudioGameOver;
+    public GameObject[] CinematicObjects;
 
 
 
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
-        gameState = GameState.StartScreen;
+        gameState = GameState.GameInitialize;
 
 
         ScreenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -88,11 +89,22 @@ public class GameManager : MonoBehaviour
                     nextGameState = GameState.Default;
                 }
                 break;
+            case GameState.GameInitialize:
+                playerController.Respawn();
+                playerController.PlayerFollowMouse = false;
+                playerController.playerIsLeavingScreen = true;
+
+                //spawn animation here
+
+                playerController.gameObject.transform.position = new Vector3(-ScreenBounds.x - 2, 0, -5);
+                Wait(3, GameState.StartScreen);
+                break;
             case GameState.StartScreen:
                 playerController.PlayerCanGetHit = false;
-                //start animation
+                playerController.playerIsLeavingScreen = false;
+                playerController.PlayerFollowMouse = true;
+
                 GUIManager.Instance.OnTitleScreen();
-                playerController.RefillHealth();
                 break;
             case GameState.StartGame:
                 playerController.PlayerCanGetHit = false;
@@ -104,6 +116,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case GameState.EndGameLoss:
+                //playerController.Death();
                 playerController.PlayerCanGetHit = false;
                 List<MonoBehaviour> objects = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
                 objects.AddRange(FindObjectsOfType<PowerupAbstract>());
@@ -112,13 +125,47 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(obj.gameObject);
                 }
+                playerController.PlayerFollowMouse = false;
+                playerController.playerIsLeavingScreen = true;
                 playerHasShieldUpgrade = false;
                 playerHasSpeedUpgrade = false;
-                Wait(4, GameState.StartScreen);
+                if(playerController.gameObject.transform.position.x > ScreenBounds.x)
+                {
+                    Wait(1, GameState.GameInitialize);
+                }
                 break;
             case GameState.EndGameWin:
                 playerController.PlayerCanGetHit = false;
+                List<MonoBehaviour> objects2 = new List<MonoBehaviour>(FindObjectsOfType<Asteroid>());
+                objects2.AddRange(FindObjectsOfType<PowerupAbstract>());
+                objects2.AddRange(FindObjectsOfType<Objective>());
+                foreach (MonoBehaviour obj in objects2)
+                {
+                    Destroy(obj.gameObject);
+                }
+                playerController.PlayerFollowMouse = false;
+                playerController.playerMoveTowardsMiddle = true;
+                if(Vector3.Distance(playerController.gameObject.transform.position, new Vector3(0,0,0)) < 1)
+                {
+                    playerController.playerMoveTowardsMiddle = false;
+                    playerController.playerIsLeavingScreen = true;
+                    Wait(3, GameState.EndGameCinematic);
+                    //gameState = GameState.EndGameCinematic;
+
+                }
+
+                
                 //end game animation
+                break;
+
+            case GameState.EndGameCinematic:
+                
+                for (int i = 0; i < CinematicObjects.Length; i++)
+                {
+                    Instantiate(CinematicObjects[i], new Vector3(-ScreenBounds.x - 2, i * -6 + 9, 0), Quaternion.identity);
+                }
+
+                Wait(10, GameState.GameInitialize);
                 break;
             case GameState.InitiateStage1:
                 playerController.PlayerCanGetHit = false;
@@ -227,7 +274,8 @@ public class GameManager : MonoBehaviour
                 CurrentStage.EndStage();
                 if (CurrentStage.GetStageResult() == StageResult.Win)
                 {
-                    Wait(5, GameState.InitiateStage3);
+                    //Wait(5, GameState.InitiateStage3);
+                    gameState = GameState.EndGameWin;
                 }
                 else
                 {
@@ -244,6 +292,11 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+    }
+
+    private void PlayEndingCinematic()
+    {
 
     }
 
@@ -317,10 +370,12 @@ public class GameManager : MonoBehaviour
     {
         Default,
         Wait,
+        GameInitialize,
         StartScreen,
         StartGame,
         EndGameLoss,
         EndGameWin,
+        EndGameCinematic,
 
 
 
