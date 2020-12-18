@@ -6,6 +6,7 @@ public class UpgradeSpeed : MonoBehaviour
 {
 
     public float hoverTimer = 3f;
+    public AudioClip sound;
 
     private float timer = 3f;
     private bool timerStarted = false;
@@ -29,6 +30,8 @@ public class UpgradeSpeed : MonoBehaviour
             else
             {
                 timer = hoverTimer;
+
+                AudioManager.Instance.PlaySound(sound);
                 game.ApplySpeedUpgrade();
                 Destroy(this.gameObject);
             }

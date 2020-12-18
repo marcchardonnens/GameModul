@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] Bombs;
     public GameObject player;
     public AudioClip AudioStageComplete;
+    public AudioClip AudioWin;
     public AudioClip AudioGameOver;
     public GameObject[] CinematicObjects;
 
@@ -325,6 +326,7 @@ public class GameManager : MonoBehaviour
         intermissionStage.SignalPlayerChoice();
         playerHasShieldUpgrade = true;
         playerController.ApplyShieldUpgrade();
+        
     }
 
     public void ApplySpeedUpgrade()
@@ -351,14 +353,21 @@ public class GameManager : MonoBehaviour
         if(playerController.Health <= 0)
         {
             CurrentStage.SetStageResult(StageResult.Loss);
-            AudioManager.Instance.PlaySound(AudioGameOver);
+            AudioManager.Instance.PlaySoundAndPauseMusic(AudioGameOver);
             return true;
         }
         if(CurrentStage.WinConditionReached())
         {
 
             CurrentStage.SetStageResult(StageResult.Win);
-            AudioManager.Instance.PlaySound(AudioStageComplete);
+            if(gameState == GameState.Stage3)
+            {
+                AudioManager.Instance.PlaySoundAndPauseMusic(AudioWin);
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound(AudioStageComplete);
+            }
             return true;
         }
 

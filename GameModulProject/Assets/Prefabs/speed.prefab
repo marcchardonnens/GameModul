@@ -164,3 +164,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverTimer: 3
+  sound: {fileID: 8300000, guid: b58266c6958f8ee4c85449bfcebd8b65, type: 3}

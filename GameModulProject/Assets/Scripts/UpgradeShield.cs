@@ -6,6 +6,7 @@ public class UpgradeShield : MonoBehaviour
 {
 
     public float hoverTimer = 3f;
+    public AudioClip sound;
 
     private float timer = 3f;
     private bool timerStarted = false;
@@ -29,6 +30,7 @@ public class UpgradeShield : MonoBehaviour
             else
             {
                 timer = hoverTimer;
+                AudioManager.Instance.PlaySound(sound);
                 game.ApplyShieldUpgrade();
                 Destroy(this.gameObject);
             }
