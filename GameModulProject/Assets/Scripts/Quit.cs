@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStarter : MonoBehaviour
+public class Quit : MonoBehaviour
 {
     public float hoverTimer = 3f;
 
@@ -12,7 +12,7 @@ public class GameStarter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class GameStarter : MonoBehaviour
             else
             {
                 timer = hoverTimer;
-                GameManager.Instance.StartGame();
+                Application.Quit(0);
             }
         }
     }
@@ -43,6 +43,4 @@ public class GameStarter : MonoBehaviour
         timer = hoverTimer;
         timerStarted = false;
     }
-
-
 }

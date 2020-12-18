@@ -15,7 +15,7 @@ public class GUIManager : MonoBehaviour
     private GameManager game;
     private GameObject title;
     private GameObject gameStarter;
-    private GameObject Background;
+    private GameObject quitButton;
 
     private void Awake()
     {
@@ -36,25 +36,23 @@ public class GUIManager : MonoBehaviour
         game = GameManager.Instance;
         title = FindObjectOfType<Title>().gameObject;
         gameStarter = FindObjectOfType<GameStarter>().gameObject;
+        quitButton = FindObjectOfType<Quit>().gameObject;
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MoveBackground();
-    }
 
     public void OnGameStart()
     {
         title.gameObject.SetActive(false);
         gameStarter.gameObject.SetActive(false);
+        quitButton.gameObject.SetActive(false);
     }
 
     public void OnTitleScreen()
     {
         title.gameObject.SetActive(true);
         gameStarter.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
     }
 
 
@@ -79,8 +77,4 @@ public class GUIManager : MonoBehaviour
         GUI.Label(new Rect(170, 10, 140, 40), " " + game.playerController.Health + "/" + game.playerController.maxHealth);
     }
 
-    private void MoveBackground()
-    {
-        //TODO
-    }
 }
