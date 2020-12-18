@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.GameInitialize:
+                playerHasShieldUpgrade = false;
+                playerHasSpeedUpgrade = false;
                 playerController.Respawn();
                 playerController.PlayerFollowMouse = false;
                 playerController.playerIsLeavingScreen = true;
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
                 //spawn animation here
 
                 playerController.gameObject.transform.position = new Vector3(-ScreenBounds.x - 2, 0, -5);
-                Wait(3, GameState.StartScreen);
+                Wait(2, GameState.StartScreen);
                 break;
             case GameState.StartScreen:
                 playerController.PlayerCanGetHit = false;
@@ -143,6 +145,8 @@ public class GameManager : MonoBehaviour
                 {
                     Destroy(obj.gameObject);
                 }
+                playerHasShieldUpgrade = false;
+                playerHasSpeedUpgrade = false;
                 playerController.PlayerFollowMouse = false;
                 playerController.playerMoveTowardsMiddle = true;
                 if(Vector3.Distance(playerController.gameObject.transform.position, new Vector3(0,0,0)) < 1)
@@ -165,7 +169,7 @@ public class GameManager : MonoBehaviour
                     Instantiate(CinematicObjects[i], new Vector3(-ScreenBounds.x - 2, i * -6 + 9, 0), Quaternion.identity);
                 }
 
-                Wait(10, GameState.GameInitialize);
+                Wait(6, GameState.GameInitialize);
                 break;
             case GameState.InitiateStage1:
                 playerController.PlayerCanGetHit = false;
